@@ -7,7 +7,7 @@
   gather_facts: false
   tasks:
     # FACTS #######################################################################
-    - name: 'Set Known Facts'
+    - name: 'sabnzbdmp4'
       set_fact:
         pgrole: 'sabnzbdmp4'
         intport: '8080'
