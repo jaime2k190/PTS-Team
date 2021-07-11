@@ -73,12 +73,12 @@ while true; do
 				echo " ⚠ " >/var/plexguide/pg.union
 			  else echo " ✅ " >/var/plexguide/pg.union; fi
 		else echo " 🔴 " >/var/plexguide/pg.union; fi
-  # Disk Calculations - 5000000 = 5GB
+  # Disk Calculations - 50000000 = 30GB
   leftover=$(df / --local | tail -n +2 | awk '{print $4}')
 	diskspace27=0
-  if [[ "$leftover" -lt "5000000" ]]; then
+  if [[ "$leftover" -lt "30000000" ]]; then
     diskspace27=1
-    echo "Emergency: Primary DiskSpace Under 5GB - Stopped Downloading Programs (i.e. NZBGET, RuTorrent)" >/opt/appdata/plexguide/emergency/message.1
+    echo "Emergency: Primary DiskSpace Under 30GB - Stopped Downloading Programs (i.e. NZBGET, RuTorrent)" >/opt/appdata/plexguide/emergency/message.1
     docker stop nzbget 1>/dev/null 2>&1
     docker stop sabnzbd 1>/dev/null 2>&1
     docker stop rutorrent 1>/dev/null 2>&1
@@ -91,7 +91,7 @@ while true; do
     docker stop transmission-vpn 1>/dev/null 2>&1
     docker stop jdownloader2 1>/dev/null 2>&1
     docker stop jd2-openvpn 1>/dev/null 2>&1
-  elif [[ "$leftover" -gt "3000000" && "$diskspace27" == "1" ]]; then
+  elif [[ "$leftover" -gt "100000000" && "$diskspace27" == "1" ]]; then
     docker start nzbget 1>/dev/null 2>&1
     docker start sabnzbd 1>/dev/null 2>&1
     docker start rutorrent 1>/dev/null 2>&1
